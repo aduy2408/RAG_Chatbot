@@ -1,0 +1,16 @@
+# API Backend Requirements
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+requests==2.31.0
+
+# Existing chatbot requirements
+streamlit==1.28.1
+langchain==0.0.350
+langchain-google-genai==0.0.6
+langchain-community==0.0.10
+chromadb==0.4.18
+sentence-transformers==2.2.2
+python-dotenv==1.0.0
+langdetect==1.0.9
+google-generativeai==0.3.2

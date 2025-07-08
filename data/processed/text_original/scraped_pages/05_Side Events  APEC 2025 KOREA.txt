@@ -1,0 +1,21 @@
+Title: Side Events > APEC 2025 KOREA
+URL: https://apec2025.kr?menuno=94
+Word Count: 227
+================================================================================
+
+=== SIDE EVENTS ===
+Side Events tableNo.Event TitleDateVenue1International Forum on Disability EmploymentMay 6, 2025Jeju2APEC Future Education Forum(AFEF)May 6, 2025Jeju3HRDMM : Policy Experience BoothsMay 6 - 12, 2025Jeju4APEC Sustainable Social Entrepreneurship Training (ASSET)May 10, 2025Jeju5Global Education Reform ConferenceMay 13, 2025Jeju6APEC University Leader’s Forum (AULF)May 13, 2025Jeju7HRDMM : Field TripMay 13, 2025Jeju8Educational Innovation Achievement Sharing Exhibition BoothMay 13 - 14, 2025Jeju9School Visit and Field TripMay 15, 2025JejuScroll
+[TABLE START]
+HEADERS: No. | Event Title | Date | Venue
+--------------------------------------------------
+ROW 1: No. | Event Title | Date | Venue
+ROW 2: 1 | International Forum on Disability Employment | May 6, 2025 | Jeju
+ROW 3: 2 | APEC Future Education Forum(AFEF) | May 6, 2025 | Jeju
+ROW 4: 3 | HRDMM : Policy Experience Booths | May 6 - 12, 2025 | Jeju
+ROW 5: 4 | APEC Sustainable Social Entrepreneurship Training (ASSET) | May 10, 2025 | Jeju
+ROW 6: 5 | Global Education Reform Conference | May 13, 2025 | Jeju
+ROW 7: 6 | APEC University Leader’s Forum (AULF) | May 13, 2025 | Jeju
+ROW 8: 7 | HRDMM : Field Trip | May 13, 2025 | Jeju
+ROW 9: 8 | Educational Innovation Achievement Sharing Exhibition Booth | May 13 - 14, 2025 | Jeju
+ROW 10: 9 | School Visit and Field Trip | May 15, 2025 | Jeju
+[TABLE END]

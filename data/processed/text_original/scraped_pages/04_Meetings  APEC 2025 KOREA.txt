@@ -1,0 +1,37 @@
+Title: Meetings > APEC 2025 KOREA
+URL: https://apec2025.kr?menuno=93
+Word Count: 725
+================================================================================
+
+=== MEETINGS ===
+Meetings tableNo.Event TitleDateVenue1Informal Senior Officials’ Meeting (ISOM)December 9 - 11, 2024Seoul21st APEC Business Advisory Council Meeting (ABAC)February 23 – 25, 2025Brisbane, Australia3First Senior Officials’ Meeting and Related Meetings (SOM1)February 24 - March 9, 2025Gyeongju4Finance and Central Bank Deputies’ Meeting (FCBDM)March 6 - 7, 2025Gyeongju52nd APEC Business Advisory Council Meeting (ABAC)April 23 - 26, 2025Toronto, Canada6APEC Ocean-Related Ministerial Meeting (AOMM)April 30 - May 1, 2025Busan7Second Senior Officials’ Meeting and Related Meetings (SOM2)May 3 - 16, 2025Jeju8Human Resource Development Ministerial Meeting (HRDMM)May 11 - 13, 2025Jeju9APEC Education Ministerial Meeting(AEMM)May 13 - 15, 2025Jeju10Ministers Responsible for Trade (MRT)May 15 - 16, 2025Jeju113rd APEC Business Advisory Council Meeting (ABAC)July 15 - 18, 2025Hai Phong, Vietnam12Third Senior Officials’ Meeting and Related Meetings (SOM3)July 26 - August 15, 2025Incheon13APEC High-Level Dialogue of Anti-Corruption Cooperation (AHDAC)July 31 - August 1, 2025Incheon14Digital & AI Ministerial Meeting (DMM)August 4 - 6, 2025Incheon15Food Security Ministerial Meeting (FSMM)August 9 - 10, 2025Incheon16Women and the Economy Forum (WEF)August 12, 2025Incheon17High-Level Dialogue on Culture (HLDC)August 26 - 28, 2025Gyeongju18Energy Ministerial Meeting (EMM)August 27 - 28, 2025Busan19Small and Medium Enterprises Ministerial Meeting (SMEMM)September 1 - 5, 2025Jeju20High-Level Meeting on Health and the EconomySeptember 15 - 16, 2025Seoul21Finance Ministerial Meeting (FMM)October 21 - 22, 2025Incheon22Structural Reform Ministerial Meeting (SRMM)October 21 - 23, 2025Incheon234th APEC Business Advisory Council Meeting (ABAC)October 26 - 28, 2025Busan24APEC CEO Summit-Gyeongju25APEC Economic Leaders’ Week (AELW)- Concluding Senior Officials’ Meeting (CSOM)- APEC Ministerial Meeting (AMM)- APEC Economic Leaders’ Meeting (AELM)-GyeongjuScroll
+[TABLE START]
+HEADERS: No. | Event Title | Date | Venue
+--------------------------------------------------
+ROW 1: No. | Event Title | Date | Venue
+ROW 2: 1 | Informal Senior Officials’ Meeting (ISOM) | December 9 - 11, 2024 | Seoul
+ROW 3: 2 | 1st APEC Business Advisory Council Meeting (ABAC) | February 23 – 25, 2025 | Brisbane, Australia
+ROW 4: 3 | First Senior Officials’ Meeting and Related Meetings (SOM1) | February 24 - March 9, 2025 | Gyeongju
+ROW 5: 4 | Finance and Central Bank Deputies’ Meeting (FCBDM) | March 6 - 7, 2025 | Gyeongju
+ROW 6: 5 | 2nd APEC Business Advisory Council Meeting (ABAC) | April 23 - 26, 2025 | Toronto, Canada
+ROW 7: 6 | APEC Ocean-Related Ministerial Meeting (AOMM) | April 30 - May 1, 2025 | Busan
+ROW 8: 7 | Second Senior Officials’ Meeting and Related Meetings (SOM2) | May 3 - 16, 2025 | Jeju
+ROW 9: 8 | Human Resource Development Ministerial Meeting (HRDMM) | May 11 - 13, 2025 | Jeju
+ROW 10: 9 | APEC Education Ministerial Meeting(AEMM) | May 13 - 15, 2025 | Jeju
+ROW 11: 10 | Ministers Responsible for Trade (MRT) | May 15 - 16, 2025 | Jeju
+ROW 12: 11 | 3rd APEC Business Advisory Council Meeting (ABAC) | July 15 - 18, 2025 | Hai Phong, Vietnam
+ROW 13: 12 | Third Senior Officials’ Meeting and Related Meetings (SOM3) | July 26 - August 15, 2025 | Incheon
+ROW 14: 13 | APEC High-Level Dialogue of Anti-Corruption Cooperation (AHDAC) | July 31 - August 1, 2025 | Incheon
+ROW 15: 14 | Digital & AI Ministerial Meeting (DMM) | August 4 - 6, 2025 | Incheon
+ROW 16: 15 | Food Security Ministerial Meeting (FSMM) | August 9 - 10, 2025 | Incheon
+ROW 17: 16 | Women and the Economy Forum (WEF) | August 12, 2025 | Incheon
+ROW 18: 17 | High-Level Dialogue on Culture (HLDC) | August 26 - 28, 2025 | Gyeongju
+ROW 19: 18 | Energy Ministerial Meeting (EMM) | August 27 - 28, 2025 | Busan
+ROW 20: 19 | Small and Medium Enterprises Ministerial Meeting (SMEMM) | September 1 - 5, 2025 | Jeju
+ROW 21: 20 | High-Level Meeting on Health and the Economy | September 15 - 16, 2025 | Seoul
+ROW 22: 21 | Finance Ministerial Meeting (FMM) | October 21 - 22, 2025 | Incheon
+ROW 23: 22 | Structural Reform Ministerial Meeting (SRMM) | October 21 - 23, 2025 | Incheon
+ROW 24: 23 | 4th APEC Business Advisory Council Meeting (ABAC) | October 26 - 28, 2025 | Busan
+ROW 25: 24 | APEC CEO Summit | - | Gyeongju
+ROW 26: 25 | APEC Economic Leaders’ Week (AELW)- Concluding Senior Officials’ Meeting (CSOM)- APEC Ministerial Meeting (AMM)- APEC Economic Leaders’ Meeting (AELM) | - | Gyeongju
+[TABLE END]
