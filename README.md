@@ -1,8 +1,6 @@
 # APEC 2025 Korea RAG Chatbot
 
-A multilingual Retrieval-Augmented Generation (RAG) chatbot system for APEC 2025 Korea events, built with FastAPI backend and Streamlit frontend.
-
-## Architecture Overview
+## Pipeline
 
 ```
 Web Scraping → Data  → Processing →Chunking → Embeddings → ChromaDB → Backend → Frontend
@@ -11,7 +9,7 @@ Web Scraping → Data  → Processing →Chunking → Embeddings → ChromaDB �
 ### Components:
 - **Backend**: FastAPI with multilingual RAG processing
 - **Frontend**: Streamlit web interface
-- **Models**: E5 multilingual embeddings + Gemini 2.0 Flash LLM
+- **Models**: E5 multilingual embeddings + Gemini LLM
 - **Database**: ChromaDB vector store
 - **Languages**: Vietnamese and English support
 
@@ -36,7 +34,7 @@ Web Scraping → Data  → Processing →Chunking → Embeddings → ChromaDB �
 │   │   └── utils.py          # Utility functions
 │   ├── api_backend/          # API backend service
 │   │   ├── api_backend.py    # FastAPI backend service
-│   │   ├── app_api.py        # Streamlit frontend (API version)
+│   │   ├── app_api.py        # Streamlit frontend
 │   │   └── start_api_backend.py # Backend startup script
 │   └── chroma_db_langchain_e5/ # Vector database storage
 ├── data/processed/            # Processed documents and embeddings
@@ -47,80 +45,116 @@ Web Scraping → Data  → Processing →Chunking → Embeddings → ChromaDB �
     └── run_app.py           # Direct loading startup
 ```
 
-## Quick Start
 
-### Prerequisites
+
+## Usage Instructions (Start to End)
+
+Follow these steps to set up and run the RAG chatbot from scratch:
+
+### Step 1: Data Collection with Scraper
+Use the `Scraper.ipynb` notebook to collect data from web sources:
+
+1. Open `Notebook files(for data scraping, processing and embedding)/Scraper.ipynb`
+2. Configure target URLs for APEC 2025 content
+3. Run all cells to scrape and save raw data
+
+### Step 2: Data Processing with RAG_Prep
+Use the `RAG_Prep.ipynb` notebook to process and prepare your data:
+
+1. Open `Notebook files(for data scraping, processing and embedding)/RAG_Prep.ipynb`
+2. Load raw scraped data
+3. Clean and preprocess text content
+4. Chunk documents into optimal sizes
+5. Add metadata and structure
+6. Output: Processed documents in `data/processed/`
+
+
+### Step 3: Create ChromaDB with RAG_LLM_Integration
+Use the `RAG_LLM_Integration.ipynb` notebook to create embeddings and vector database:
+
+1. Open `Notebook files(for data scraping, processing and embedding)/RAG_LLM_Integration.ipynb`
+2. Load processed documents from Step 2
+3. Generate embeddings using E5 multilingual model
+4. Create ChromaDB vector store
+5. Test retrieval functionality
+6. Output: ChromaDB database in `backend/chroma_db_langchain_e5/`
+
+
+### Step 4: Configure Environment and API
+Set up the backend configuration:
+
+1. Create `.env` file in `backend/` directory:
+```bash
+GOOGLE_API_KEY=your_google_api_key_here
+```
+
+2. Install dependencies:
 ```bash
 pip install -r requirements_api.txt
 ```
 
-### Environment Setup
-Create `.env` file in the `backend/` directory:
-```
-GOOGLE_API_KEY=your_google_api_key_here
-```
+3. Configure settings in `backend/modules/config.py`:
+   - Model parameters
+   - Database paths
+   - Language settings
 
-### 1. Start API Backend
+### Step 5: Start the Backend API
+Launch the FastAPI backend service:
+
 ```bash
 # From root directory
 python start_api.py
 
-# Or directly from backend directory
+# Or directly
 python backend/api_backend/start_api_backend.py
 ```
-- API: `http://localhost:8000`
-- Docs: `http://localhost:8000/docs`
 
-### 2. Start Frontend
+- API will be available at: `http://localhost:8000`
+
+### Step 6: Start the Frontend Interface
+Launch the Streamlit frontend:
+
 ```bash
 # From root directory
 python start_frontend.py
 
-# Or directly from demo directory
+# Or directly
 python demo/start_frontend.py
 ```
-- Frontend: `http://localhost:8502`
 
-## Data Pipeline
+- Frontend will be available at: `http://localhost:8502`
 
-### 1. Data Collection (`Scraper.ipynb`)
-- Web scraping of APEC 2025 content
-- Content extraction and cleaning
-- Metadata preservation
+### Step 7: Test the Complete System
+1. Open the frontend at `http://localhost:8502`
+2. Select language (Vietnamese/English or auto-detect)
+3. Ask questions about APEC 2025 content
+4. Verify that:
+   - Responses are generated correctly
+   - Sources are displayed with proper attribution
+   - Auto-suggestions appear after responses
+   - Language detection works properly
 
-### 2. Data Processing (`RAG_Development.ipynb`)
+### Step 8: API Integration
+For custom applications, use the API endpoints:
+
 ```python
-# Document processing pipeline
-Raw Text → Cleaning → Chunking → Metadata Addition
+import requests
+
+# Chat endpoint
+response = requests.post("http://localhost:8000/chat", json={
+    "message": "What are the main APEC 2025 events?",
+    "auto_detect": True,
+    "preferred_language": "en",
+    "top_k": 5
+})
+
+# Get suggestions
+suggestions = requests.post("http://localhost:8000/suggestions", json={
+    "response_content": response.json()["answer"],
+    "language": "en"
+})
 ```
 
-Key Features:
-- Recursive character text splitting
-- Table preservation logic
-- Chunk size: 1000 characters
-- Overlap: 200 characters
-- Minimum chunk size: 200 characters
-
-### 3. Embedding Generation (`RAG_Test_Embedding.ipynb`)
-```python
-# E5 multilingual embeddings with task prefixes
-Documents: "passage: {content}"
-Queries: "query: {question}"
-```
-
-Model: `intfloat/multilingual-e5-large`
-- Supports Vietnamese and English
-- 1024-dimensional embeddings
-- Optimized for multilingual retrieval
-
-### 4. Vector Database Setup
-```python
-# ChromaDB with persistent storage
-vectorstore = Chroma(
-    persist_directory="./chroma_db_langchain_e5",
-    embedding_function=embeddings
-)
-```
 
 ## RAG System
 
@@ -142,7 +176,7 @@ def detect_language(text):
 1. **Query Processing**: Language detection + task prefix
 2. **Vector Search**: Similarity search in ChromaDB
 3. **Context Assembly**: Top-k relevant documents
-4. **LLM Generation**: Gemini 2.0 Flash with language-specific prompts
+4. **LLM Generation**: Gemini 2.0 Flash with prompts
 
 ## API Endpoints
 
@@ -179,7 +213,7 @@ Main RAG endpoint for chat responses.
 ```
 
 ### `POST /suggestions`
-Context-aware follow-up suggestions.
+Follow-up suggestions.
 
 **Request**:
 ```json
@@ -212,7 +246,7 @@ Context-aware follow-up suggestions.
 - **Auto-suggestions**: Context-aware follow-up questions
 - **Source Attribution**: Expandable source documents
 - **Language Detection**: Visual language indicators
-- **Mobile-responsive**: Custom CSS for mobile devices
+- **Mobile-responsive**: CSS for mobile devices
 
 ### UI Components (`modules/ui_components.py`)
 - Chat message rendering
@@ -238,73 +272,3 @@ SUPPORTED_LANGUAGES = ["vi", "en"]
 DEFAULT_LANGUAGE = "vi"
 AUTO_DETECT_DEFAULT = True
 ```
-
-## Development
-
-### Running Development Notebooks
-1. **Data Processing**: `backend/Notebook files(for data scraping, processing and embedding)/RAG_Development.ipynb`
-2. **Model Integration**: `backend/Notebook files(for data scraping, processing and embedding)/RAG_LLM_Integration.ipynb`
-3. **Embedding Testing**: `backend/Notebook files(for data scraping, processing and embedding)/RAG_Test_Embedding.ipynb`
-4. **Web Scraping**: `backend/Notebook files(for data scraping, processing and embedding)/Scraper.ipynb`
-
-### Testing API Endpoints
-```bash
-
-
-# Chat test
-curl -X POST http://localhost:8000/chat \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Hello", "auto_detect": true}'
-```
-
-### Direct Loading Alternative
-For development and testing:
-```bash
-python direct\ loading/run_app.py
-```
-Access at: `http://localhost:8501`
-
-## Performance
-
-### Resource Usage
-- **API Backend**: ~2GB RAM (models loaded once)
-- **Frontend**: ~50MB RAM per session
-- **Vector Database**: ~500MB disk space
-
-### Scalability
-- Single backend serves multiple frontends
-- Stateless frontend design
-- Persistent vector database
-- Concurrent request handling
-
-## Deployment
-
-### Production Checklist
-- [ ] Set production API keys in `.env`
-- [ ] Configure CORS for specific origins
-- [ ] Set up reverse proxy (nginx)
-- [ ] Enable API rate limiting
-- [ ] Configure logging and monitoring
-- [ ] Set up database backups
-
-### Environment Variables
-```bash
-GOOGLE_API_KEY=your_production_api_key
-API_BASE_URL=https://your-api-domain.com
-```
-
-
-
-### Development Setup
-1. Clone repository
-2. Install dependencies: `pip install -r requirements_api.txt`
-3. Set up `.env` file
-4. Run data processing notebooks
-5. Start development servers
-
-### Code Structure
-- **Backend**: FastAPI with async endpoints
-- **Frontend**: Streamlit with custom components
-- **Models**: LangChain integration with custom prompts
-- **Utils**: Language detection and suggestion generation
-
