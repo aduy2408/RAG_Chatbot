@@ -47,15 +47,13 @@ Web Scraping → Data  → Processing →Chunking → Embeddings → ChromaDB �
 
 
 
-## Usage Instructions (Start to End)
-
-Follow these steps to set up and run the RAG chatbot from scratch:
+## Usage Instructions
 
 ### Step 1: Data Collection with Scraper
 Use the `Scraper.ipynb` notebook to collect data from web sources:
 
 1. Open `Notebook files(for data scraping, processing and embedding)/Scraper.ipynb`
-2. Configure target URLs for APEC 2025 content
+2. Configure target urls for APEC 2025 content
 3. Run all cells to scrape and save raw data
 
 ### Step 2: Data Processing with RAG_Prep
@@ -96,16 +94,11 @@ pip install -r requirements_api.txt
 3. Configure settings in `backend/modules/config.py`:
    - Model parameters
    - Database paths
-   - Language settings
 
 ### Step 5: Start the Backend API
 Launch the FastAPI backend service:
 
 ```bash
-# From root directory
-python start_api.py
-
-# Or directly
 python backend/api_backend/start_api_backend.py
 ```
 
@@ -115,62 +108,24 @@ python backend/api_backend/start_api_backend.py
 Launch the Streamlit frontend:
 
 ```bash
-# From root directory
-python start_frontend.py
-
-# Or directly
 python demo/start_frontend.py
 ```
-
-- Frontend will be available at: `http://localhost:8502`
 
 ### Step 7: Test the Complete System
 1. Open the frontend at `http://localhost:8502`
 2. Select language (Vietnamese/English or auto-detect)
 3. Ask questions about APEC 2025 content
-4. Verify that:
-   - Responses are generated correctly
-   - Sources are displayed with proper attribution
-   - Auto-suggestions appear after responses
-   - Language detection works properly
 
-### Step 8: API Integration
-For custom applications, use the API endpoints:
-
-```python
-import requests
-
-# Chat endpoint
-response = requests.post("http://localhost:8000/chat", json={
-    "message": "What are the main APEC 2025 events?",
-    "auto_detect": True,
-    "preferred_language": "en",
-    "top_k": 5
-})
-
-# Get suggestions
-suggestions = requests.post("http://localhost:8000/suggestions", json={
-    "response_content": response.json()["answer"],
-    "language": "en"
-})
-```
 
 
 ## RAG System
 
 ### Core Components (`modules/chatbot_core.py`)
 
-#### Language Detection
-```python
-def detect_language(text):
-    # Combines langdetect with Vietnamese character detection
-    # Returns: 'vi' or 'en'
-```
 
 #### Multilingual Prompts
-- **Vietnamese**: Specialized prompt for Vietnamese responses
+- **Vietnamese**: OPtimized prompt for Vietnamese responses
 - **English**: Optimized prompt for English responses
-- **Context-aware**: Includes specific instructions for table data
 
 #### Retrieval Process
 1. **Query Processing**: Language detection + task prefix
@@ -259,7 +214,7 @@ Follow-up suggestions.
 
 ### Model Settings (`modules/config.py`)
 ```python
-EMBEDDING_MODEL = "intfloat/multilingual-e5-large"
+EMBEDDING_MODEL = "intfloat/multilingual-e5-base"
 LLM_MODEL = "gemini-2.0-flash"
 LLM_TEMPERATURE = 0.1
 VECTOR_DB_PATH = "./chroma_db_langchain_e5"
