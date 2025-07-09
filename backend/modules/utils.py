@@ -72,8 +72,8 @@ def validate_environment():
     return True, "Environment validation passed"
 
 
-def get_context_suggestions(response_content, language):
-    """Generate context-aware suggestions based on the assistant's response"""
+def get_hardcoded_suggestions(response_content, language):
+    """Generate hardcoded context-aware suggestions based on the assistant's response"""
     response_lower = response_content.lower()
 
     # Define suggestion patterns based on content keywords
@@ -150,3 +150,97 @@ def get_context_suggestions(response_content, language):
             "Any other information?",
             "What else can I ask?"
         ]
+
+
+def generate_llm_suggestions(response_content, language, llm=None):
+    """Generate suggestions using LLM based on the assistant's response"""
+    if not llm:
+        return []
+
+    try:
+        if language == "vi":
+            prompt = f"""Dựa trên phản hồi sau về APEC 2025 Korea, hãy tạo ra 2-3 câu hỏi tiếp theo ngắn gọn và hữu ích mà người dùng có thể quan tâm:
+
+Phản hồi: {response_content[:500]}...
+
+Yêu cầu:
+- Tạo 2-3 câu hỏi ngắn gọn (tối đa 10 từ mỗi câu)
+- Câu hỏi phải liên quan đến nội dung phản hồi
+- Tập trung vào APEC 2025, sự kiện, địa điểm, thủ tục
+- Chỉ trả về danh sách câu hỏi, mỗi câu một dòng
+- Không giải thích thêm"""
+        else:
+            prompt = f"""Based on the following response about APEC 2025 Korea, generate 2-3 short and useful follow-up questions that users might be interested in:
+
+Response: {response_content[:500]}...
+
+Requirements:
+- Generate 2-3 concise questions (max 10 words each)
+- Questions must be related to the response content
+- Focus on APEC 2025, events, venues, procedures
+- Only return the list of questions, one per line
+- No additional explanations"""
+
+        # Use the LLM to generate suggestions
+        result = llm.invoke(prompt)
+
+        # Parse result to extract questions
+        suggestions = []
+        if hasattr(result, 'content'):
+            content = result.content
+        else:
+            content = str(result)
+
+        lines = content.strip().split('\n')
+        for line in lines:
+            line = line.strip()
+            # Remove bullet points, numbers, quotes
+            line = line.lstrip('•-*123456789. "\'')
+            line = line.rstrip('"\'')
+
+            if line.startswith('- '):
+                line = line[2:]
+            if line.startswith('* '):
+                line = line[2:]
+
+            # Only keep lines that look like questions and are reasonable length
+            if line and len(line) > 5 and len(line) < 100 and '?' in line:
+                cleaned_line = line.replace('\n', ' ').replace('\r', ' ').strip()
+                if cleaned_line:
+                    suggestions.append(cleaned_line)
+
+        return suggestions[:3]  # Limit to 3 suggestions
+
+    except Exception as e:
+        return []
+
+
+def get_context_suggestions(response_content, language, llm=None):
+    """Generate combined suggestions: hardcoded + LLM-generated"""
+    # Get hardcoded suggestions
+    hardcoded_suggestions = get_hardcoded_suggestions(response_content, language)
+
+    # Get LLM-generated suggestions
+    llm_suggestions = generate_llm_suggestions(response_content, language, llm)
+
+    # Combine suggestions
+    combined_suggestions = []
+
+    # Add hardcoded suggestions first (up to 2)
+    combined_suggestions.extend(hardcoded_suggestions[:2])
+
+    # Add LLM suggestions to fill remaining slots wit validation
+    for suggestion in llm_suggestions:
+        # Validate that the suggestion is clean and usable
+        if (suggestion not in combined_suggestions and
+            len(combined_suggestions) < 3 and
+            suggestion and
+            len(suggestion.strip()) > 5 and
+            len(suggestion.strip()) < 100):
+            combined_suggestions.append(suggestion.strip())
+
+    for suggestion in hardcoded_suggestions[2:]:
+        if len(combined_suggestions) < 3:
+            combined_suggestions.append(suggestion)
+
+    return combined_suggestions[:3]  

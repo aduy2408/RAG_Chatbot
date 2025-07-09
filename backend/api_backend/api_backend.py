@@ -132,16 +132,20 @@ async def chat_endpoint(request: ChatRequest):
 @app.post("/suggestions", response_model=SuggestionsResponse)
 async def suggestions_endpoint(request: SuggestionsRequest):
     """
-    Suggestions endpoint - returns context-aware follow-up questions
+    Suggestions endpoint - returns context-aware follow-up questions (hardcoded + LLM-generated)
     """
     try:
+        # Pass the LLM instance to enable LLM-generated suggestions
+        llm_instance = chatbot.llm if chatbot else None
+
         suggestions = get_context_suggestions(
             response_content=request.response_content,
-            language=request.language
+            language=request.language,
+            llm=llm_instance
         )
-        
+
         return SuggestionsResponse(suggestions=suggestions)
-        
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error generating suggestions: {str(e)}")
 

@@ -100,10 +100,10 @@ class APECChatbot:
             else:
                 detected_language = preferred_language
             
-            # Get language-specific prompt
+            # Get prompt
             language_prompt = self.get_language_specific_prompt(detected_language)
             
-            # Create temporary chain with language-specific prompt
+            # Create chain with prompt
             temp_qa_chain = RetrievalQA.from_chain_type(
                 llm=self.llm,
                 chain_type="stuff",

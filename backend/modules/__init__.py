@@ -6,7 +6,9 @@ from .utils import (
     get_language_flag,
     create_welcome_message,
     validate_environment,
-    get_context_suggestions
+    get_context_suggestions,
+    get_hardcoded_suggestions,
+    generate_llm_suggestions
 )
 from .ui_components import (
     render_sidebar,
@@ -29,6 +31,8 @@ __all__ = [
     'create_welcome_message',
     'validate_environment',
     'get_context_suggestions',
+    'get_hardcoded_suggestions',
+    'generate_llm_suggestions',
     'render_sidebar',
     'render_chat_message',
     'render_sources_expander',

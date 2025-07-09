@@ -71,7 +71,7 @@ def main():
             message["role"] == "assistant" and
             not (suggestion_prompt or chat_input_prompt)  # Don't show if we're processing input
         )
-        render_chat_message(message, show_suggestions=is_last_assistant)
+        render_chat_message(message, show_suggestions=is_last_assistant, llm=st.session_state.chatbot.llm if st.session_state.chatbot else None)
 
     # Use suggestion if available, otherwise use chat input
     prompt = suggestion_prompt or chat_input_prompt
@@ -129,7 +129,7 @@ def main():
 
             # Show suggestions immediately for the new response
             from modules.ui_components import render_auto_suggestions
-            render_auto_suggestions(new_message)
+            render_auto_suggestions(new_message, llm=st.session_state.chatbot.llm)
 
 
 

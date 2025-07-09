@@ -17,7 +17,7 @@ Web Scraping → Data  → Processing →Chunking → Embeddings → ChromaDB �
 - **Frontend**: Streamlit web interface
 - **Models**: E5 multilingual embeddings + Gemini LLM
 - **Database**: ChromaDB vector store
-- **Languages**: Vietnamese and English support(Could add more since we are essentially using an embedding model trained on multiple languages, just need to change the LLM to support the language)
+- **Languages**: Vietnamese and English support(Could add more since we are essentially using an embedding model trained on multiple languages, just need to change the LLM to support replying that language)
 
 ## Project Structure
 
@@ -140,6 +140,8 @@ python demo/start_frontend.py
 3. **Context Assembly**: Top-k relevant documents
 4. **LLM Generation**: Gemini 2.0 Flash with prompts
 
+
+
 ## API Endpoints
 
 ### `POST /chat`
@@ -205,5 +207,21 @@ Follow-up suggestions.
 
 ### Streamlit Interface (`app_api.py`)
 
-### UI Components (`modules/ui_components.py`)
 
+## Backend
+
+### Utils (`modules/utils.py`)
+- Contains utility functions for language detection, suggestion generation, etc.
+#### Autosuggestion
+- **Hardcoded suggestions**: Pre-defined questions for common topics
+- **LLM-Generated suggestions**: Gemini generates context-aware questions
+- **Combination**: Hardcoded + LLM-generated suggestions(up to 3, but you can change the columns to display more and change the number of suggestions in the `get_context_suggestions` function in `modules/utils.py`)
+
+### Chatbot Core (`modules/chatbot_core.py`)
+- Handles RAG processing, model setup, and query execution
+
+### Config (`modules/config.py`)
+- Contains configuration and constants
+
+### UI Components (`modules/ui_components.py`)
+- Handles rendering of chat interface, suggestions, etc.

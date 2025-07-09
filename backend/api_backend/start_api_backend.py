@@ -66,7 +66,6 @@ def start_api_server():
     print("API: http://localhost:8000")
     
     try:
-        # Change to backend/api_backend directory to run uvicorn
         api_backend_dir = os.path.dirname(__file__)
         os.chdir(api_backend_dir)
 

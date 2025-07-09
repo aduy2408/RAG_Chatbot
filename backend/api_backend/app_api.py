@@ -95,7 +95,7 @@ def render_auto_suggestions_api(message):
 
         # Create columns for suggestions
         cols = st.columns(min(len(suggestions), 3))
-        for i, suggestion in enumerate(suggestions[:3]):  # Limit to 3 suggestions
+        for i, suggestion in enumerate(suggestions[:3]): #3 suggestions
             with cols[i % 3]:
                 # Use message content hash + index for unique keys
                 import hashlib
@@ -116,10 +116,9 @@ def main():
     """Main application function"""
     st.set_page_config(**ChatbotConfig.get_streamlit_config())
     
-    # Apply custom CSS
     st.markdown(MOBILE_FRIENDLY_CSS, unsafe_allow_html=True)
     
-    # Check API backend health
+    # Check  health
     api_healthy, health_info = check_api_health()
     if not api_healthy:
         render_error_message(f"API Backend Error: {health_info}")
@@ -140,7 +139,7 @@ def main():
     suggestion_prompt = None
     if 'quick_query' in st.session_state and st.session_state.quick_query:
         suggestion_prompt = st.session_state.quick_query
-        st.session_state.quick_query = None 
+        st.session_state.quick_query = None
 
     # Always render chat input at the bottom
     chat_input_prompt = render_chat_input()
@@ -176,7 +175,7 @@ def main():
     # Use suggestion if available, otherwise use chat input
     prompt = suggestion_prompt or chat_input_prompt
 
-    # Process any input (quick query or typed input)
+    # Process any input 
     if prompt:
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
@@ -197,11 +196,11 @@ def main():
                 )
 
             if success:
-                # Show language detection badge
+                # Show language  
                 lang_flag = get_language_flag(api_response["detected_language"])
                 st.markdown(f'<span class="language-badge">{lang_flag} {api_response["detected_language"].upper()}</span>', unsafe_allow_html=True)
 
-                # Display the answer
+                # Display answer
                 st.markdown(api_response["answer"])
 
                 # Show response metadata

@@ -48,7 +48,7 @@ def render_sidebar_actions():
         st.rerun()
 
 
-def render_chat_message(message, show_suggestions=False):
+def render_chat_message(message, show_suggestions=False, llm=None):
     """Render a single chat message"""
     with st.chat_message(message["role"]):
         if message["role"] == "assistant":
@@ -65,19 +65,19 @@ def render_chat_message(message, show_suggestions=False):
 
         # Show auto-suggestions only for the most recent assistant message
         if message["role"] == "assistant" and show_suggestions:
-            render_auto_suggestions(message)
+            render_auto_suggestions(message, llm=llm)
 
 
-def render_auto_suggestions(message):
-    """Render auto-suggestions based on the assistant's response"""
+def render_auto_suggestions(message, llm=None):
+    """Render auto-suggestions based on the assistant's response (hardcoded + LLM-generated)"""
     # Don't show suggestions if one has been clicked
     if 'quick_query' in st.session_state and st.session_state.quick_query:
         return
 
     detected_language = message.get("detected_language", "en")
 
-    # Get context-aware suggestions based on the response content
-    suggestions = get_context_suggestions(message["content"], detected_language)
+    # Get combined context-aware suggestions (hardcoded + LLM-generated)
+    suggestions = get_context_suggestions(message["content"], detected_language, llm)
 
     if suggestions:
         st.markdown("---")
@@ -85,7 +85,7 @@ def render_auto_suggestions(message):
 
         # Create columns for suggestions
         cols = st.columns(min(len(suggestions), 3))
-        for i, suggestion in enumerate(suggestions[:3]): 
+        for i, suggestion in enumerate(suggestions[:3]):
             with cols[i % 3]:
                 # Use message content hash + index for unique keys to avoid conflicts
                 message_hash = hashlib.md5(message["content"].encode()).hexdigest()[:8]
@@ -125,7 +125,7 @@ def render_sources_expander(sources):
                 
                 # Show content preview
                 if source.get('content_preview'):
-                    with st.expander("👁️ Preview", expanded=False):
+                    with st.expander("Preview", expanded=False):
                         st.text(source['content_preview'])
                 
                 st.divider()
