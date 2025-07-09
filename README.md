@@ -6,12 +6,18 @@
 Web Scraping → Data  → Processing →Chunking → Embeddings → ChromaDB → Backend → Frontend
 ```
 
+![Chatbot](./screenshots/UI.png)
+![Chatbot](./screenshots/main_chat.png)
+![Chatbot](./screenshots/Autosuggestion.png)
+
+
+
 ### Components:
 - **Backend**: FastAPI with multilingual RAG processing
 - **Frontend**: Streamlit web interface
 - **Models**: E5 multilingual embeddings + Gemini LLM
 - **Database**: ChromaDB vector store
-- **Languages**: Vietnamese and English support
+- **Languages**: Vietnamese and English support(Could add more since we are essentially using an embedding model trained on multiple languages, just need to change the LLM to support the language)
 
 ## Project Structure
 
@@ -48,15 +54,16 @@ Web Scraping → Data  → Processing →Chunking → Embeddings → ChromaDB �
 
 
 ## Usage Instructions
+Step 1 - 3 are all optional as I already have created the chromadb. Just add api key (gemini) and run backend+frontend
 
-### Step 1: Data Collection with Scraper
+### Step 1: Data Collection with Scraper(OPtional)
 Use the `Scraper.ipynb` notebook to collect data from web sources:
 
 1. Open `Notebook files(for data scraping, processing and embedding)/Scraper.ipynb`
 2. Configure target urls for APEC 2025 content
 3. Run all cells to scrape and save raw data
 
-### Step 2: Data Processing with RAG_Prep
+### Step 2: Data Processing with RAG_Prep(Optional)
 Use the `RAG_Prep.ipynb` notebook to process and prepare your data:
 
 1. Open `Notebook files(for data scraping, processing and embedding)/RAG_Prep.ipynb`
@@ -67,7 +74,7 @@ Use the `RAG_Prep.ipynb` notebook to process and prepare your data:
 6. Output: Processed documents in `data/processed/`
 
 
-### Step 3: Create ChromaDB with RAG_LLM_Integration
+### Step 3: Create ChromaDB with RAG_LLM_Integration(OPTIONAL)
 Use the `RAG_LLM_Integration.ipynb` notebook to create embeddings and vector database:
 
 1. Open `Notebook files(for data scraping, processing and embedding)/RAG_LLM_Integration.ipynb`
@@ -78,7 +85,7 @@ Use the `RAG_LLM_Integration.ipynb` notebook to create embeddings and vector dat
 6. Output: ChromaDB database in `backend/chroma_db_langchain_e5/`
 
 
-### Step 4: Configure Environment and API
+### Step 4: Configure Environment and API(REQUIRED)
 Set up the backend configuration:
 
 1. Create `.env` file in `backend/` directory:
@@ -95,7 +102,7 @@ pip install -r requirements_api.txt
    - Model parameters
    - Database paths
 
-### Step 5: Start the Backend API
+### Step 5: Start the Backend API(REQUIRED)
 Launch the FastAPI backend service:
 
 ```bash
@@ -104,7 +111,7 @@ python backend/api_backend/start_api_backend.py
 
 - API will be available at: `http://localhost:8000`
 
-### Step 6: Start the Frontend Interface
+### Step 6: Start the Frontend Interface(REQUIRED)
 Launch the Streamlit frontend:
 
 ```bash
@@ -194,36 +201,9 @@ Follow-up suggestions.
 - `GET /health` - Detailed system status
 - `GET /languages` - Supported languages
 
-## Frontend Features
+## Frontend 
 
 ### Streamlit Interface (`app_api.py`)
-- **Multilingual UI**: Vietnamese and English support
-- **Auto-suggestions**: Context-aware follow-up questions
-- **Source Attribution**: Expandable source documents
-- **Language Detection**: Visual language indicators
-- **Mobile-responsive**: CSS for mobile devices
 
 ### UI Components (`modules/ui_components.py`)
-- Chat message rendering
-- Source document display
-- Auto-suggestion buttons
-- Language selection sidebar
-- Response metadata (timing, source count)
 
-## Configuration
-
-### Model Settings (`modules/config.py`)
-```python
-EMBEDDING_MODEL = "intfloat/multilingual-e5-base"
-LLM_MODEL = "gemini-2.0-flash"
-LLM_TEMPERATURE = 0.1
-VECTOR_DB_PATH = "./chroma_db_langchain_e5"
-DEFAULT_TOP_K = 5
-```
-
-### Language Support
-```python
-SUPPORTED_LANGUAGES = ["vi", "en"]
-DEFAULT_LANGUAGE = "vi"
-AUTO_DETECT_DEFAULT = True
-```

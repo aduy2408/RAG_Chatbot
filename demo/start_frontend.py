@@ -36,13 +36,7 @@ def wait_for_api_backend(max_wait=30):
 
     return False
 
-def start_streamlit_app():
-    """Start the Streamlit frontend"""
-    import os
-import sys
-import subprocess
-import requests
-import time
+
 
 def check_api_backend():
     try:
