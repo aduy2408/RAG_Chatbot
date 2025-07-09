@@ -38,9 +38,8 @@ Web Scraping → Data  → Processing →Chunking → Embeddings → ChromaDB �
 │   │   ├── config.py         # Configuration and styling
 │   │   ├── ui_components.py  # Streamlit UI components
 │   │   └── utils.py          # Utility functions
-│   ├── api_backend/          # API backend service
-│   │   ├── api_backend.py    # FastAPI backend service
-│   │   ├── app_api.py        # Streamlit frontend
+│   ├── api_backend/          # API backend 
+│   │   ├── api_backend.py    
 │   │   └── start_api_backend.py # Backend startup script
 │   └── chroma_db_langchain_e5/ # Vector database storage
 ├── data/processed/            # Processed documents and embeddings
@@ -121,7 +120,7 @@ python demo/start_frontend.py
 ### Step 7: Test the Complete System
 1. Open the frontend at `http://localhost:8502`
 2. Select language (Vietnamese/English or auto-detect)
-3. Ask questions about APEC 2025 content
+3. Ask questions 
 
 ## API Endpoints
 
@@ -186,8 +185,8 @@ Follow-up suggestions.
 
 ## Frontend 
 
-### Streamlit Interface (`app_api.py`)
-
+### Streamlit Interface (`./demo/start_frontend.py `)
+- Uses components from `modules/ui_components.py`
 
 ## Backend
 
