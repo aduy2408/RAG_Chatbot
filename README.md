@@ -123,25 +123,6 @@ python demo/start_frontend.py
 2. Select language (Vietnamese/English or auto-detect)
 3. Ask questions about APEC 2025 content
 
-
-
-## RAG System
-
-### Core Components (`modules/chatbot_core.py`)
-
-
-#### Multilingual Prompts
-- **Vietnamese**: OPtimized prompt for Vietnamese responses
-- **English**: Optimized prompt for English responses
-
-#### Retrieval Process
-1. **Query Processing**: Language detection + task prefix
-2. **Vector Search**: Similarity search in ChromaDB
-3. **Context Assembly**: Top-k relevant documents
-4. **LLM Generation**: Gemini 2.0 Flash with prompts
-
-
-
 ## API Endpoints
 
 ### `POST /chat`
@@ -219,6 +200,17 @@ Follow-up suggestions.
 
 ### Chatbot Core (`modules/chatbot_core.py`)
 - Handles RAG processing, model setup, and query execution
+
+##### Multilingual Prompts
+- **Vietnamese**: OPtimized prompt for Vietnamese responses
+- **English**: Optimized prompt for English responses
+
+##### Retrieval Process
+1. **Query Processing**: Language detection + task prefix
+2. **Vector Search**: Similarity search in ChromaDB
+3. **Context Assembly**: Top-k relevant documents
+4. **LLM Generation**: Gemini 2.0 Flash with prompts
+
 
 ### Config (`modules/config.py`)
 - Contains configuration and constants
