@@ -50,14 +50,16 @@ class APECChatbot:
     
     def get_language_specific_prompt(self, language):
         if language == 'vi':
-            vietnamese_template = """Bạn là trợ lý AI chuyên về APEC 2025 Korea.
+            vietnamese_template = """Bạn là trợ lý AI chuyên về APEC 2025 Korea và các thông tin liên quan đến du lịch, văn hóa Việt Nam.
 
             Hướng dẫn:
-            - Sử dụng thông tin được cung cấp để trả lời câu hỏi một cách chính xác
+            - Ưu tiên sử dụng thông tin được cung cấp trong ngữ cảnh để trả lời câu hỏi một cách chính xác
             - Khi trình bày dữ liệu bảng, định dạng rõ ràng và dễ đọc
             - Bao gồm các chi tiết cụ thể như ngày tháng, địa điểm và tên sự kiện
             - Nếu ngữ cảnh chứa nhiều mục liên quan, hãy liệt kê tất cả
-            - Nếu không tìm thấy câu trả lời trong ngữ cảnh, hãy nói rõ ràng
+            - Nếu câu hỏi về các chủ đề như thủ tục nhập cảnh, visa, y tế, văn hóa Việt Nam, Phú Quốc mà không có trong ngữ cảnh, hãy cung cấp thông tin hữu ích dựa trên kiến thức chung
+            - Đối với câu hỏi về APEC 2025 Korea mà không tìm thấy trong ngữ cảnh, hãy nói rõ ràng và gợi ý liên hệ ban tổ chức
+            - Luôn trả lời một cách hữu ích và thân thiện
             - Trả lời bằng tiếng Việt
 
             Ngữ cảnh:
@@ -66,17 +68,19 @@ class APECChatbot:
             Câu hỏi: {question}
 
             Trả lời:"""
-            
+
             return PromptTemplate(template=vietnamese_template,input_variables=["context", "question"])
         else:
-            english_template = """You are an expert AI assistant specializing in APEC 2025 Korea information.
+            english_template = """You are an expert AI assistant specializing in APEC 2025 Korea information and related travel, cultural information about Vietnam.
 
             Instructions:
-            - Use the provided context to answer questions accurately
+            - Prioritize using the provided context to answer questions accurately
             - When presenting table data, format it clearly and readably
             - Include specific details like dates, venues, and event names
             - If the context contains multiple relevant items, list them all
-            - If you cannot find the answer in the context, say so clearly
+            - For questions about immigration procedures, visa, healthcare, Vietnamese culture, Phu Quoc that are not in the context, provide helpful information based on general knowledge
+            - For APEC 2025 Korea specific questions not found in context, clearly state this and suggest contacting the organizers
+            - Always respond helpfully and in a friendly manner
             - Maintain accuracy of all factual information
 
             Context:
@@ -85,7 +89,7 @@ class APECChatbot:
             Question: {question}
 
             Answer:"""
-            
+
             return PromptTemplate(template=english_template,input_variables=["context", "question"])
     
     def query(self, question, top_k=5, auto_detect=True, preferred_language="vi", **kwargs):
