@@ -208,7 +208,7 @@ Follow-up suggestions.
 1. **Query Processing**: Language detection + task prefix
 2. **Vector Search**: Similarity search in ChromaDB
 3. **Context Assembly**: Top-k relevant documents
-4. **LLM Generation**: Gemini 2.0 Flash with prompts
+4. **LLM Generation**: Gemini with prompts
 
 
 ### Config (`modules/config.py`)
